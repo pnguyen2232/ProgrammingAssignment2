@@ -13,7 +13,6 @@ makeVector <- function(x = numeric()){
 }
 
 
-
 cachemean <- function(x, ...) {
 	m<- x$getmean()
 	if(!is.null(m)){
@@ -26,7 +25,9 @@ cachemean <- function(x, ...) {
 	m
 }
 
-##this is the functin to cache a matrix
+
+##above is the originals
+##this is the function to cache a matrix
 
 makeCacheMatrix <- function(x=matrix()) {
 	##empty the inv value, just in case
@@ -51,6 +52,7 @@ makeCacheMatrix <- function(x=matrix()) {
 	setinv=setinv, getinv=getinv)
 }
 
+##this is the function to make an inverse of matrix 'x'
 
 cacheSolve <- function(x, ...) {
 	##get the inverse of the matrix 'x'
