@@ -26,15 +26,26 @@ cachemean <- function(x, ...) {
 	m
 }
 
+##this is the functin to cache a matrix
 
 makeCacheMatrix <- function(x=matrix()) {
+	##empty the inv value, just in case
 	inv=NULL
+
+	##set the matrix
 	set = function(y){
+
 		x<<-y
+		##y is set as value for the matrix 'x'
+
 		inv<<-NULL
 	}
+
+	##get the matrix
 	get = function () x
+	##set the inverse, and the value for it
 	setinv = function (inverse) inv <<- inverse
+	##get the inverse
 	getinv = function() inv
 	list(set=set, get=get, 
 	setinv=setinv, getinv=getinv)
@@ -42,16 +53,20 @@ makeCacheMatrix <- function(x=matrix()) {
 
 
 cacheSolve <- function(x, ...) {
+	##get the inverse of the matrix 'x'
 	inv=x$getinv()
 
+	##if the inverse already exist in the cache, grab that and return the following message
 	if(!is.null(inv)){
 		message("getting cached data")
 		return(inv)
 	}
 	
+	##otherwise, calculate the matrix
 	mat.data=x$get()
 	inv=solve(mat.data,...)
 	
+	##cache the inverse with 'setin'
 	x$setinv(inv)
 	return(inv)
 }
